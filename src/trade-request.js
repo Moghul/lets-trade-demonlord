@@ -157,7 +157,7 @@ export default class TradeRequest {
                     compatibility.updateCurrency(currency, key, this.currency[key]);
                 }
             }
-            compatibility.applyCurrency(this.destinationActor, currency);
+            compatibility.applyCurrency(this.sourceActor, currency);
         }
     }
 
