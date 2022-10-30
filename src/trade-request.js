@@ -11,8 +11,8 @@ export default class TradeRequest {
 
     /**
      * Creates the trade request.
-     * 
-     * @param {Internal data} data 
+     *
+     * @param {Internal data} data
      */
     constructor(data) {
         this._data = data;
@@ -53,7 +53,7 @@ export default class TradeRequest {
         return this._data.itemId;
     }
 
-    /** 
+    /**
      * How many items will be passed over.
      */
     get quantity() {
@@ -84,7 +84,7 @@ export default class TradeRequest {
 
     /**
      * Checks to see if the request can still be performed.
-     * 
+     *
      * @returns {boolean} If the trade is still valid
      */
     isValid() {
@@ -108,8 +108,9 @@ export default class TradeRequest {
             }
         }
         else if (this.currency) {
+            const compatibility = getCompatibility(this.sourceActor.sheet);
             // Currency should be between 0 and max.
-            let max = this.sourceActor.system.currency;
+            let max = duplicate(compatibility.parseCurrency(this.sourceActor.system));
             let has_value = false;
             for (let key in this.currency) {
                 if (this.currency[key] > max[key] || this.currency[key] < 0) {
@@ -150,7 +151,7 @@ export default class TradeRequest {
         }
         else {
             const compatibility = getCompatibility(this.sourceActor.sheet);
-            let currency = duplicate(this.sourceActor.system.currency);
+            let currency = duplicate(compatibility.parseCurrency(this.sourceActor.system));
             for (let key in this.currency) {
                 if(this.currency[key] > 0) {
                     compatibility.updateCurrency(currency, key, this.currency[key]);
@@ -174,15 +175,12 @@ export default class TradeRequest {
             this.destinationActor.createEmbeddedDocuments("Item", [itemData]);
         }
         else {
-            let currency = duplicate(this.destinationActor.system.currency);
+            const compatibility = getCompatibility(this.sourceActor.sheet);
+            let currency = duplicate(compatibility.parseCurrency(this.sourceActor.system));
             for (let key in this.currency) {
                 currency[key] += this.currency[key];
             }
-            this.destinationActor.update({
-                system: {
-                    currency: currency
-                }
-            });
+            compatibility.applyCurrency(this.destinationActor, currency);
         }
     }
 

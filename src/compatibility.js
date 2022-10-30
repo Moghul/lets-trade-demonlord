@@ -244,6 +244,25 @@ function parseCurrencyDefault(system) {
     return system.currency;
 }
 
+/**
+ * Applies currency changes to the destination actor
+ */
+function applyCurrencyDemonlord(actor, currency) {
+    actor.update({
+        system: {
+            wealth: currency
+        }
+    });
+}
+
+function applyCurrencyDefault(actor, currency) {
+    actor.update({
+        system: {
+            currency: currency
+        }
+    });
+}
+
 const compatibility = {
     "demonlord": {
         currency: currencyDemonlord,
@@ -251,7 +270,8 @@ const compatibility = {
         item: itemDemonlord,
         updateCurrency: updateCurrencyDemonlord,
         parseCurrencyMax: parseCurrencyMaxDemonlord,
-        parseCurrency: parseCurrencyDemonlord
+        parseCurrency: parseCurrencyDemonlord,
+        applyCurrency: applyCurrencyDemonlord
     },
     "tidy5e": {
         currency: currencyTidySheet,
@@ -259,7 +279,8 @@ const compatibility = {
         item: itemTidy5e,
         updateCurrency: updateCurrencyDefault,
         parseCurrencyMax: parseCurrencyMaxDefault,
-        parseCurrency: parseCurrencyDefault
+        parseCurrency: parseCurrencyDefault,
+        applyCurrency: applyCurrencyDefault
     },
     "alt5e": {
         currency: currencyDefault,
@@ -267,7 +288,8 @@ const compatibility = {
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
         parseCurrencyMax: parseCurrencyMaxDefault,
-        parseCurrency: parseCurrencyDefault
+        parseCurrency: parseCurrencyDefault,
+        applyCurrency: applyCurrencyDefault
     },
     "dndbcs": {
         currency: currencyDndbcs,
@@ -275,7 +297,8 @@ const compatibility = {
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
         parseCurrencyMax: parseCurrencyMaxDefault,
-        parseCurrency: parseCurrencyDefault
+        parseCurrency: parseCurrencyDefault,
+        applyCurrency: applyCurrencyDefault
     },
     "cb5es": {
         currency: currencyCb5es,
@@ -283,7 +306,8 @@ const compatibility = {
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
         parseCurrencyMax: parseCurrencyMaxDefault,
-        parseCurrency: parseCurrencyDefault
+        parseCurrency: parseCurrencyDefault,
+        applyCurrency: applyCurrencyDefault
     },
     "ogl5e-sheet": {
         currency: currencyOgl5e,
@@ -291,7 +315,8 @@ const compatibility = {
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
         parseCurrencyMax: parseCurrencyMaxDefault,
-        parseCurrency: parseCurrencyDefault
+        parseCurrency: parseCurrencyDefault,
+        applyCurrency: applyCurrencyDefault
     },
     "sw5e":{
         currency: currencySw5e,
@@ -299,7 +324,8 @@ const compatibility = {
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
         parseCurrencyMax: parseCurrencyMaxDefault,
-        parseCurrency: parseCurrencyDefault
+        parseCurrency: parseCurrencyDefault,
+        applyCurrency: applyCurrencyDefault
     },
     "tidysw5e":{
         currency: currencyTidySheet,
@@ -307,7 +333,8 @@ const compatibility = {
         item: itemTidy5e,
         updateCurrency: updateCurrencyDefault,
         parseCurrencyMax: parseCurrencyMaxDefault,
-        parseCurrency: parseCurrencyDefault
+        parseCurrency: parseCurrencyDefault,
+        applyCurrency: applyCurrencyDefault
     },
     "loot-sheet-npc": {
         currency: currencyLootSheet5e,
@@ -315,7 +342,8 @@ const compatibility = {
         item: itemLootSheet5e,
         updateCurrency: updateCurrencyLootSheet5e,
         parseCurrencyMax: parseCurrencyMaxLootSheet5e,
-        parseCurrency: parseCurrencyDefault
+        parseCurrency: parseCurrencyDefault,
+        applyCurrency: applyCurrencyDefault
     },
     "default": {
         currency: currencyDefault,
@@ -323,7 +351,8 @@ const compatibility = {
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
         parseCurrencyMax: parseCurrencyMaxDefault,
-        parseCurrency: parseCurrencyDefault
+        parseCurrency: parseCurrencyDefault,
+        applyCurrency: applyCurrencyDefault
     },
 };
 
