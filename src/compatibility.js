@@ -183,7 +183,10 @@ function itemLootSheet5e(item, actorId, callback) {
  * @param subtractValue {number} amount to subtract
  */
 function updateCurrencyDemonlord(currency, key, subtractValue) {
-    currency[key] = parseInt(currency[key]) - parseInt(subtractValue).toString();
+    console.log(currency);
+    console.log(key);
+    console.log(subtractValue);
+    currency[key] = (parseInt(currency[key]) - parseInt(subtractValue)).toString();
 }
 
 function updateCurrencyDefault(currency, key, subtractValue) {
@@ -200,7 +203,8 @@ function updateCurrencyLootSheet5e(currency, key, subtractValue) {
  * @param currencyMax {object} object to retrieve currencyMax from
  */
 function parseCurrencyMaxDemonlord(currencyMax) {
-    return parseInt(currencyMax);
+    console.log(currencyMax);
+    return currencyMax ? parseInt(currencyMax) : 0;
 }
 
 function parseCurrencyMaxDefault(currencyMax) {
