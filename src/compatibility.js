@@ -1,3 +1,14 @@
+function currencyDemonlord(element, actorId, callback) {
+    let currencyIcon = $(`<a class="currency-control currency-trade" title="${game.i18n.localize("LetsTrade5E.Send")}">
+        <i class="fas fa-balance-scale-right"></i>
+    </a>`)[0];
+    currencyIcon.dataset.actorId = actorId;
+    currencyIcon.addEventListener("click", callback);
+
+    let insertPoint = $(".window-content div.tab.items > .dl-item-row-header > div.col-1 > .wealth-edit", element)[0];
+    insertPoint.after(currencyIcon);
+}
+
 function currencyDefault(element, actorId, callback) {
     let currencyIcon = $(`<a class="currency-control currency-trade" title="${game.i18n.localize("LetsTrade5E.Send")}">
         <i class="fas fa-balance-scale-right"></i>
@@ -83,6 +94,10 @@ function currencyLootSheet5e(element, actorId, callback) {
  *
  * @returns {object[]}
  */
+function fetchDemonlord(element) {
+    return  $(".tab.items > .dl-item-row.dropitem", element);
+}
+
 function fetchDefault(element) {
     return  $(".inventory.tab .item", element);
 }
@@ -101,6 +116,21 @@ function fetchLootSheet5e(element) {
  * @param {object} item
  * @param {function} callback
  */
+ function itemDemonlord(item, actorId, callback) {
+    const deleteIcon = $("dl-clickable", item);
+    const tradeIcon = $(`<a class="item-control item-trade" title="${game.i18n.localize("LetsTrade5E.Send")}">
+        <i class="fas fa-balance-scale-right"></i>
+    </a>`)[0];
+
+    tradeIcon.dataset.itemId = item.dataset.itemId;
+    tradeIcon.dataset.actorId = actorId;
+    tradeIcon.addEventListener("click", callback);
+
+    if (deleteIcon[0]) {
+        deleteIcon[0].before(tradeIcon);
+    }
+}
+
 function itemDefault(item, actorId, callback) {
     const edit = $(".item-control.item-edit", item);
     const icon = $(`<a class="item-control item-trade" title="${game.i18n.localize("LetsTrade5E.Send")}">
@@ -151,6 +181,10 @@ function itemLootSheet5e(item, actorId, callback) {
  * @param key {string}type of currency to update
  * @param subtractValue {number} amount to subtract
  */
+function updateCurrencyDemonlord(currency, key, subtractValue) {
+    currency[key] -= subtractValue;
+}
+
 function updateCurrencyDefault(currency, key, subtractValue) {
     currency[key] -= subtractValue;
 }
@@ -164,6 +198,10 @@ function updateCurrencyLootSheet5e(currency, key, subtractValue) {
  *
  * @param currencyMax {object} object to retrieve currencyMax from
  */
+function parseCurrencyMaxDemonlord(currencyMax) {
+    return currencyMax;
+}
+
 function parseCurrencyMaxDefault(currencyMax) {
     return currencyMax;
 }
@@ -190,6 +228,13 @@ function sheetCompatibilityName(sheetClassesRaw) {
 }
 
 const compatibility = {
+    "DLBaseActorSheet": {
+        currency: currencyDemonlord,
+        fetch: fetchDemonlord,
+        item: itemDemonlord,
+        updateCurrency: updateCurrencyDemonlord,
+        parseCurrencyMax: parseCurrencyMaxDemonlord
+    },
     "tidy5e": {
         currency: currencyTidySheet,
         fetch: fetchDefault,
