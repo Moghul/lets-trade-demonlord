@@ -7,7 +7,7 @@
     "minimumCoreVersion": "10.284",
     "compatibleCoreVersion": "10.284",
     "minimumSystemVersion": "2.0.2",
-    "system": ["dnd5e", "sw5e"],
+    "system": ["dnd5e", "sw5e", "demonlord"],
     "license": "LICENSE",
     "socket": true,
     "styles": [

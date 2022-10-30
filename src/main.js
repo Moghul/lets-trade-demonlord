@@ -50,6 +50,7 @@ async function renderInjectionHook(sheet, element, character) {
     console.log("Let's Trade 5e | Added trade icons to sheet for actor " + actorId);
 }
 
+Hooks.on("renderDLBaseActorSheet", renderInjectionHook);
 Hooks.on("renderActorSheet5eCharacter", renderInjectionHook);
 Hooks.on("renderActorSheet5eCharacterNew", renderInjectionHook);
 

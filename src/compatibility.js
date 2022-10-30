@@ -1,12 +1,12 @@
 function currencyDemonlord(element, actorId, callback) {
-    let currencyIcon = $(`<a class="currency-control currency-trade" title="${game.i18n.localize("LetsTrade5E.Send")}">
+    let currencyIcon = $(`<a class="currency-control currency-trade" style="margin: 0 10px 0 -10px" title="${game.i18n.localize("LetsTrade5E.Send")}">
         <i class="fas fa-balance-scale-right"></i>
     </a>`)[0];
     currencyIcon.dataset.actorId = actorId;
     currencyIcon.addEventListener("click", callback);
 
-    let insertPoint = $(".window-content div.tab.items > .dl-item-row-header > div.col-1 > .wealth-edit", element)[0];
-    insertPoint.after(currencyIcon);
+    let insertPoint = $("div.tab.items > .dl-item-row-header > div.col-1 > .wealth-edit", element)[0];
+    insertPoint.before(currencyIcon);
 }
 
 function currencyDefault(element, actorId, callback) {
@@ -117,8 +117,8 @@ function fetchLootSheet5e(element) {
  * @param {function} callback
  */
  function itemDemonlord(item, actorId, callback) {
-    const deleteIcon = $("dl-clickable", item);
-    const tradeIcon = $(`<a class="item-control item-trade" title="${game.i18n.localize("LetsTrade5E.Send")}">
+    const deleteIcon = $(".dl-clickable.item-delete", item);
+    const tradeIcon = $(`<a class="item-control dl-clickable item-trade" style="margin: 0 10px 0 -15px" title="${game.i18n.localize("LetsTrade5E.Send")}">
         <i class="fas fa-balance-scale-right"></i>
     </a>`)[0];
 
@@ -127,6 +127,7 @@ function fetchLootSheet5e(element) {
     tradeIcon.addEventListener("click", callback);
 
     if (deleteIcon[0]) {
+        deleteIcon.parent().removeClass('dl-clickable');
         deleteIcon[0].before(tradeIcon);
     }
 }
@@ -228,7 +229,7 @@ function sheetCompatibilityName(sheetClassesRaw) {
 }
 
 const compatibility = {
-    "DLBaseActorSheet": {
+    "demonlord": {
         currency: currencyDemonlord,
         fetch: fetchDemonlord,
         item: itemDemonlord,
