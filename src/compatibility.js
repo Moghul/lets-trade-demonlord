@@ -228,76 +228,102 @@ function sheetCompatibilityName(sheetClassesRaw) {
     return "default";
 }
 
+/**
+ * Handles different currency sources for different systems
+ */
+function parseCurrencyDemonlord(system) {
+    return {
+        gc: system.wealth.gc,
+        ss: system.wealth.ss,
+        cp: system.wealth.cp,
+        bits: system.wealth.bits
+    };
+}
+
+function parseCurrencyDefault(system) {
+    return system.currency;
+}
+
 const compatibility = {
     "demonlord": {
         currency: currencyDemonlord,
         fetch: fetchDemonlord,
         item: itemDemonlord,
         updateCurrency: updateCurrencyDemonlord,
-        parseCurrencyMax: parseCurrencyMaxDemonlord
+        parseCurrencyMax: parseCurrencyMaxDemonlord,
+        parseCurrency: parseCurrencyDemonlord
     },
     "tidy5e": {
         currency: currencyTidySheet,
         fetch: fetchDefault,
         item: itemTidy5e,
         updateCurrency: updateCurrencyDefault,
-        parseCurrencyMax: parseCurrencyMaxDefault
+        parseCurrencyMax: parseCurrencyMaxDefault,
+        parseCurrency: parseCurrencyDefault
     },
     "alt5e": {
         currency: currencyDefault,
         fetch: fetchDefault,
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
-        parseCurrencyMax: parseCurrencyMaxDefault
+        parseCurrencyMax: parseCurrencyMaxDefault,
+        parseCurrency: parseCurrencyDefault
     },
     "dndbcs": {
         currency: currencyDndbcs,
         fetch: fetchDefault,
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
-        parseCurrencyMax: parseCurrencyMaxDefault
+        parseCurrencyMax: parseCurrencyMaxDefault,
+        parseCurrency: parseCurrencyDefault
     },
     "cb5es": {
         currency: currencyCb5es,
         fetch: fetchDefault,
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
-        parseCurrencyMax: parseCurrencyMaxDefault
+        parseCurrencyMax: parseCurrencyMaxDefault,
+        parseCurrency: parseCurrencyDefault
     },
     "ogl5e-sheet": {
         currency: currencyOgl5e,
         fetch: fetchOgl5e,
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
-        parseCurrencyMax: parseCurrencyMaxDefault
+        parseCurrencyMax: parseCurrencyMaxDefault,
+        parseCurrency: parseCurrencyDefault
     },
     "sw5e":{
         currency: currencySw5e,
         fetch: fetchDefault,
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
-        parseCurrencyMax: parseCurrencyMaxDefault
+        parseCurrencyMax: parseCurrencyMaxDefault,
+        parseCurrency: parseCurrencyDefault
     },
     "tidysw5e":{
         currency: currencyTidySheet,
         fetch: fetchDefault,
         item: itemTidy5e,
         updateCurrency: updateCurrencyDefault,
-        parseCurrencyMax: parseCurrencyMaxDefault
+        parseCurrencyMax: parseCurrencyMaxDefault,
+        parseCurrency: parseCurrencyDefault
     },
     "loot-sheet-npc": {
         currency: currencyLootSheet5e,
         fetch: fetchLootSheet5e,
         item: itemLootSheet5e,
         updateCurrency: updateCurrencyLootSheet5e,
-        parseCurrencyMax: parseCurrencyMaxLootSheet5e
+        parseCurrencyMax: parseCurrencyMaxLootSheet5e,
+        parseCurrency: parseCurrencyDefault
     },
     "default": {
         currency: currencyDefault,
         fetch: fetchDefault,
         item: itemDefault,
         updateCurrency: updateCurrencyDefault,
-        parseCurrencyMax: parseCurrencyMaxDefault
+        parseCurrencyMax: parseCurrencyMaxDefault,
+        parseCurrency: parseCurrencyDefault
     },
 };
 
