@@ -171,8 +171,8 @@ export default class TradeRequest {
             this.destinationActor.createEmbeddedDocuments("Item", [itemData]);
         }
         else {
-            const compatibility = getCompatibility(this.sourceActor.sheet);
-            let currency = duplicate(compatibility.parseCurrency(this.sourceActor.system));
+            const compatibility = getCompatibility(this.destinationActor.sheet);
+            let currency = duplicate(compatibility.parseCurrency(this.destinationActor.system));
             for (let key in this.currency) {
                 currency[key] = parseInt(this.currency[key]) + parseInt(currency[key]);
             }
